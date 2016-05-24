@@ -1,0 +1,17 @@
+<div class="modal-header">
+    Send report via email
+</div>
+<div class="modal-body">
+    <uib-alert ng-repeat="alert in alerts" type="{{ alert.type }}" dismiss-on-timeout="alert.timeout">
+        {{ alert.msg }}
+    </uib-alert>
+    <form class="form-inline" ng-submit="emailReport(email)">
+        <div class="form-group">
+            <input type="email" ng-model="email" required class="form-control" placeholder="Email"/>
+        </div>
+        <button class="btn btn-primary">
+            Send
+        </button>
+    </form>
+</div>
+

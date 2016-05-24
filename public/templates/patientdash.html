@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="jumbotron">
+        <h2>
+            Hi {{ patientInfo.firstName }}!
+        </h2>
+        <p>
+            Here are your reports
+        </p>
+    </div>
+    <div class="">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" ng-model="searchReportsText"/>
+        </div>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <th>
+                Patient Name
+            </th>
+            <th>
+                Doctor
+            </th>
+            <th>
+                Diagnosis
+            </th>
+            <th>
+                Microscopic Exam
+            </th>
+            <th>
+                Gross Exam
+            </th>
+            <th>
+                Other Comments
+            </th>
+            <th>
+                Actions
+            </th>
+        </thead>
+        <tbody>
+            <tr  ng-repeat="report in reportList | filter:searchReportsText">
+                <td>
+                    {{ report.patientFirstName }} {{ report.patientLastName }}
+                </td>
+                <td>
+                    {{ report.doctorName }}
+                </td>
+                <td>
+                    {{ report.diagnosis }}
+                </td>
+                <td>
+                    {{ report.microscopicExam }}
+                </td>
+                <td>
+                    {{ report.grossExam }}
+                </td>
+                <td>
+                    {{ report.otherComments }}
+                </td>
+                
+                <td>
+                    <a class="btn btn-primary" ui-sref="patientreportdetails({reportId:report.reportId})">
+                        View
+                    </a>
+                    <a class="btn btn-default" href="{{apiUrl}}patientreports/reportexport/reportpdf/{{report.reportId}}" target="_blank">
+                        PDF
+                    </a>
+                    <button class="btn btn-default" ng-click="openEmail(report)">Email</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

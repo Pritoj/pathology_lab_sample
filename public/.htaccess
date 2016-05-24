@@ -1,0 +1,7 @@
+Options +FollowSymlinks
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !.*\.(css|js|html|png|jpg|jpeg|gif|txt|theme)
+RewriteRule (.*) index.html [L]

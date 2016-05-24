@@ -1,0 +1,83 @@
+<nav-bar>
+</nav-bar>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Tests
+            <button class="btn btn-primary btn-xs pull-right" ng-click="addTestShow = !addTestShow">
+                <span ng-if="!addTestShow">
+                    Add New Test
+                </span>
+                <span ng-if="addTestShow">
+                    Hide
+                </span>
+            </button>
+        </div>
+        <div class="panel-body">
+            <div class="well" ng-if="addTestShow">
+                <form class="form-inline"  ng-submit="addTest(testName)">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Test Name" ng-model="testName" required/>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Add
+                    </button>
+                </form>
+            </div>
+            <div class="">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" ng-model="searchTestsText"/>
+                </div>
+            </div>
+            <uib-alert ng-repeat="alert in alerts" type="{{ alert.type }}" dismiss-on-timeout="alert.timeout">
+                {{ alert.msg }}
+            </uib-alert>
+            <div class="panel panel-default" ng-repeat="test in testList | filter:searchTestsText">
+                <div class="panel-heading">
+                    <span ng-if="!test.$edit">{{ test.testTypeName }}</span>
+                    <input ng-if="test.$edit" type="text" ng-model="test.editName" class="form-control" placeholder="Test Name" style="width:100px;"/>
+                    <div ng-if="!test.$edit" class="btn-group pull-right">
+                        <button class="btn btn-default btn-xs" ng-click="editTest(test)">Edit</button>
+                        <button class="btn btn-danger btn-xs" ng-click="deleteTest(test)">Delete</button>
+                    </div>
+                    <div ng-if="test.$edit" class="btn-group pull-right">
+                        <button class="btn btn-success btn-xs" ng-click="updateTest(test)">Save</button>
+                        <button class="btn btn-default btn-xs" ng-click="closeEditTest(test)">Cancel</button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <uib-alert ng-repeat="alert in test.alerts" type="{{ alert.type }}" dismiss-on-timeout="alert.timeout">
+                        {{ alert.msg }}
+                    </uib-alert>    
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="field in test.fields">
+                            <span ng-if="!field.$edit">{{field.testFieldName}}</span>
+                            <input ng-if="field.$edit" type="text" ng-model="field.editTestFieldName" class="form-control" placeholder="Field Name" style="width:100px;" />
+                            <div ng-if="!field.$edit" class="btn-group pull-right">
+                                <button class="btn btn-default btn-xs" ng-click="editTestField(test,field)">Edit</button>
+                                <button class="btn btn-danger btn-xs" ng-click="deleteTestField(test,field)">Delete</button>
+                            </div>
+                            <div ng-if="field.$edit" class="btn-group pull-right">
+                                <button class="btn btn-default btn-xs" ng-click="updateTestField(test,field)">Save</button>
+                                <button class="btn btn-danger btn-xs" ng-click="closeFieldEdit(test,field)">Cancel</button>
+                            </div>
+                        </li>
+                    </ul>
+                    <form class="form-inline"  ng-submit="addTestField(test)">
+	                    <div class="form-group">
+	                        <div class="input-group">
+	                            <input type="text" class="form-control" placeholder="Test Field Name" ng-model="test.testFieldName" required/>
+	                        </div>
+	                    </div>
+						
+	                    <button type="submit" class="btn btn-primary">
+	                        Add
+	                    </button>
+	                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

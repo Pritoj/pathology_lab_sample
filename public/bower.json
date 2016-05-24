@@ -1,0 +1,25 @@
+{
+  "name": "pathology-lab",
+  "authors": [
+    "Pritoj Singh <pritojs@gmail.com>"
+  ],
+  "description": "",
+  "main": "index.html",
+  "license": "None",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-ui-router": "^0.2.18",
+    "angular-bootstrap": "^1.3.2",
+    "bootstrap": "^3.3.6",
+    "angular-local-storage": "^0.2.7"
+  }
+}

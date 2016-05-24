@@ -1,0 +1,122 @@
+<nav-bar>
+</nav-bar>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">
+                Patients
+            </h2>
+            <button class="btn btn-primary btn-xs" ng-click="addPatientShow = !addPatientShow">
+                <span ng-if="!addPatientShow">
+                    Add New Patient
+                </span>
+                <span ng-if="addPatientShow">
+                    Hide
+                </span>
+            </button>
+        </div>
+        <div class="panel-body">
+            <div class="">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" ng-model="searchPatientsText"/>
+                </div>
+            </div>
+            <div class="pull-right">
+            </div>
+            <div class="well" ng-if="addPatientShow">
+                <form class="form-inline"  ng-submit="addPatient(newPatientInfo)">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="First Name" ng-model="newPatientInfo.firstName" required/>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Last Name" ng-model="newPatientInfo.lastName" required/>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Email Address" ng-model="newPatientInfo.emailAddress" required/>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Password" ng-model="newPatientInfo.password" required/>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Add
+                    </button>
+                </form>
+            </div>
+            <uib-alert ng-repeat="alert in alerts" type="{{ alert.type }}" dismiss-on-timeout="alert.timeout">
+                {{ alert.msg }}
+            </uib-alert>
+            <table class="table table-hover">
+                <thead>
+                    <th>
+                        First Name
+                    </th>
+                    <th>
+                        Last Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </thead>
+                <tbody>
+                    <tr ng-if="patientList" ng-repeat="patient in patientList | filter:searchPatientsText">
+                        <td>
+                            <span ng-if="!patient.$edit">
+                                {{ patient.firstName }}
+                            </span>
+                            <input type="text" class="form-control" ng-model="patient.edit.firstName" placeholder="First Name" ng-if="patient.$edit"/>
+                        </td>
+                        <td>
+                            <span ng-if="!patient.$edit">
+                                {{ patient.lastName }}
+                            </span>
+                            <input type="text" class="form-control" ng-model="patient.edit.lastName" placeholder="Last Name" ng-if="patient.$edit"/>
+                        </td>
+                        <td>
+                            <span ng-if="!patient.$edit">
+                                {{ patient.emailAddress }}
+                            </span>
+                            <input type="text" class="form-control" ng-model="patient.edit.emailAddress" placeholder="Email Address" ng-if="patient.$edit"/>
+                        </td>
+                        <td>
+                            <div class="btn-group" ng-if="patient.deletePatientConfirm">
+                                Sure you want to delete {{patient.firstName}}?
+                                <button  ng-click="deletePatient(patient)" class="btn btn-danger btn-xs">
+                                    Yes
+                                </button>
+                                <button ng-click="patient.deletePatientConfirm = false" class="btn btn-default btn-xs">
+                                    Cancel
+                                </button>
+                                
+                            </div>
+                            
+                            <div class="btn-group" ng-if="!patient.$edit">
+
+                                <button ng-click="editPatient(patient)" class="btn btn-default btn-xs">
+                                    Edit
+                                </button>
+                                <button ng-if="!patient.deletePatientConfirm" ng-click="openDeletePatient(patient)" class="btn btn-danger btn-xs">
+                                    Delete
+                                </button>
+                                
+                            </div>
+                            <div class="btn-group" ng-if="patient.$edit">
+                                <button ng-click="updatePatient(patient)" class="btn btn-success btn-xs">
+                                    Save
+                                </button>
+                                <button ng-click="cancelEdit(patient)" class="btn btn-danger btn-xs">
+                                    Cancel
+                                </button>
+                            </div>
+                            <button ng-click="changePassword(patient)" class="btn btn-primary btn-xs">Change Password</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

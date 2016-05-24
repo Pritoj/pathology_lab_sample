@@ -1,0 +1,10 @@
+RewriteEngine On
+
+RewriteCond $1 !^(index\.php|public|robots\.txt)
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+
+
+<Files "index.php">
+AcceptPathInfo On
+</Files> 

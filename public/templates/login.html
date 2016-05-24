@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+  	<div class="col-md-8 col-md-offset-2">
+  		<div class="panel panel-default">
+  			<div class="panel-heading">
+			    <h3 class="panel-title">Login to the Pathology Lab</h3>
+			  </div>
+		  <div class="panel-body">
+		    <form ng-submit="login()">
+		    	<div class="form-group">
+			    	<div class="input-group">
+					  <input ng-model="loginDetails.username" type="email" class="form-control" placeholder="Username/email address" name="username" required>
+					  <span class="input-group-addon" >johndoe@exmaple.com</span>
+					</div>
+					
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+					  <input ng-model="loginDetails.password" type="password" class="form-control" placeholder="Password" name = "password" required>
+					  <span class="input-group-addon">****</span>
+					</div>
+					
+				</div>
+				
+				<div class="alert alert-danger" role="alert" ng-repeat="err in errs">
+				  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				  <span class="sr-only">Error:</span>
+				  {{err}}
+				</div>
+
+				<div class="alert alert-default" role="alert" ng-if="loggingIn">
+				  Logging in,please wait.
+				</div>
+				<div class="form-group">
+					<input type="hidden" name="login" value="1" />
+					<button class="btn btn-primary" type="submit" ng-disabled="loggingIn">Login</button>
+				</div>
+		    </form>
+		  </div>
+		</div>
+  	</div>
+  </div>
+  
+</div>

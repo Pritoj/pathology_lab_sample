@@ -1,0 +1,18 @@
+<div class="modal-header login_modal_header" ng-if="modalHeading">
+    <button type="button" class="close" ng-click="ok()" aria-hidden="true">
+    ×
+    </button>
+    {{modalHeading}}
+</div>
+<div class="modal-body login-modal" ng-if="modalContent">
+    {{modalContent}}
+    <div class="clearfix"></div>
+</div>
+<div class="modal-footer">
+    <a name class="btn btn-success" ng-click="ok()">
+        Yes
+    </a>
+    <a name class="btn btn-default" ng-click="cancel()">
+        Cancel
+    </a>
+</div>

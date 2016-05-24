@@ -1,0 +1,40 @@
+<html ng-app="pathlab">
+    <head>
+        <title>
+            Pathology Lab
+        </title>
+        <base href="http://localhost/pathology_lab/public/" />
+        <link rel="stylesheet" type = "text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    </head/>
+    <body>
+    	<div ui-view>
+    		
+    	</div>
+    	<script src="bower_components/angular/angular.min.js"></script>
+    	<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    	<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+
+    	<script src="js/app.js"></script>
+    	<script src="js/routes.js"></script>
+        <script src="js/controllers/login.js"></script>
+        <script src="js/controllers/operator.js"></script>
+        <script src="js/controllers/patients.js"></script>
+        <script src="js/controllers/tests.js"></script>
+        <script src="js/controllers/reports.js"></script>
+        <script src="js/controllers/reportdetails.js"></script>
+        <script src="js/controllers/patientreportdetails.js"></script>
+        <script src="js/controllers/patientdash.js"></script>
+        <script src="js/controllers/email.js"></script>
+        <script src="js/controllers/password.js"></script>
+
+        <script src="js/services/loginService.js"></script>
+        <script src="js/services/patientService.js"></script>
+        <script src="js/services/testService.js"></script>
+        <script src="js/services/reportService.js"></script>
+        <script src="js/services/messageModal.js"></script>
+
+        <script src="js/directives/navbar.js"></script>
+    </body>
+</html>

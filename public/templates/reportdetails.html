@@ -1,0 +1,95 @@
+<nav-bar>
+</nav-bar>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="panel-title">
+                Report for {{ reportDetails.patientFirstName }} by {{ reportDetails.doctorName }}
+            </h1>
+        </div>
+        <div class="panel-body">
+            <div class="well">
+                <h3>
+                    Diagnosis
+                </h3>
+                <p>
+                    {{ reportDetails.diagnosis }}
+                </p>
+                <hr/>
+                <h3>
+                    Microscopic Exam
+                </h3>
+                <p>
+                    {{ reportDetails.microscopicExam }}
+                </p>
+                <hr/>
+                <h3>
+                    Gross Exam
+                </h3>
+                <p>
+                    {{ reportDetails.grossExam }}
+                </p>
+                <hr/>
+                <h3>
+                    Other Comments
+                </h3>
+                <p>
+                    {{ reportDetails.otherComments }}
+                </p>
+                <hr/>
+            </div>
+        </div>
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Tests
+                    <button type="button" class="btn btn-xs btn-primary" ng-click="addTestResultShow = !addTestResultShow">
+                        Add New Test
+                    </button>
+                </div>
+                <div class="panel-body">
+                    <div class="well" ng-if="addTestResultShow">
+                        <form class="form"  ng-submit="addTestResult(newTest)">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input  type="text"  uib-typeahead="testType as testType.testTypeName for testType in testList | filter:$viewValue | limitTo:8"  ng-model="newTest.testType"  class="form-control" placeholder = "Test Name" required/>
+                                    <span class="input-group-addon">
+                                        Select Test Type
+                                    </span>
+                                </div>
+                                <h3 ng-if="newTest.testType">
+                                    Fields
+                                </h3>
+                                <div class="input-group" ng-if="newTest.testType" ng-repeat="field in newTest.testType.fields track by $index">
+                                    <input type="text" ng-model="newTest.values[field.testFieldId]" class="form-control" required/>
+                                    <span class="input-group-addon">
+                                        {{ field.testFieldName }}
+                                    </span>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" ng-if="newTest.testType">
+                                Add
+                            </button>
+                        </form>
+                    </div>
+                    <uib-alert ng-repeat="alert in alerts" type="{{ alert.type }}" dismiss-on-timeout="alert.timeout">
+                        {{ alert.msg }}
+                    </uib-alert>
+                    <uib-accordion>
+                        <uib-accordion-group ng-repeat="test in reportDetails.tests">
+                            <uib-accordion-heading>
+                                {{ test.testTypeName }}
+                            </uib-accordion-heading>
+                            <p ng-repeat="field in test.fields">
+                                {{ field.testFieldName }} -
+                                <mark>
+                                    {{ field.value }}
+                                </mark>
+                            </p>
+                        </uib-accordion-group>
+                    </uib-accordion>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
